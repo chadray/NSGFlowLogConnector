@@ -463,6 +463,8 @@ namespace NwNsgProject
                 sbBase.Append(",\"version\":\"").Append(record.properties.Version.ToString("0.0")).Append("\"");
                 sbBase.Append(",\"deviceExtId\":\"").Append(record.MakeDeviceExternalID()).Append("\"");
 
+                float version = record.properties.Version;
+
                 int count = 1;
                 var sbOuterFlowRecord = new StringBuilder();
                 foreach (var outerFlows in record.properties.flows)
@@ -481,7 +483,7 @@ namespace NwNsgProject
                         var firstFlowTupleEncountered = true;
                         foreach (var flowTuple in innerFlows.flowTuples)
                         {
-                            var tuple = new NSGFlowLogTuple(flowTuple);
+                            var tuple = new NSGFlowLogTuple(flowTuple, version);
 
                             if (firstFlowTupleEncountered)
                             {
